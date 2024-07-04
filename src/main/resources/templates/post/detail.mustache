@@ -1,27 +1,27 @@
 {{>/layout/main-header}}
 
 <div class="container">
-    <input id="postId" type="hidden" value="" />
-    <input id="pageOwnerId" type="hidden" value="" />
-    <input id="my-loveId" type="hidden" value="">
+    <input id="postId" type="hidden" value="1" />
+    <input id="pageOwnerId" type="hidden" value="1" />
+    <input id="my-loveId" type="hidden" value="1">
 
 
     <div class="my_post_detail_title">
-        <h2></h2>
+        <h2>제목</h2>
     </div>
     <hr />
 
     <div class="my_post_detail_content">
-
+        내용
     </div>
     <div class="my_post_info_box d-flex">
         <div class="my_post_info">
 
-            <i class="fa-solid fa-heart my_fake_like my_mr_sm_1"></i>
-            by <b></b> <span class="my_text_body_sm"></span>
+            <i class="fa-solid fa-heart my_fake_like my_mr_sm_1" id="heart-1"></i>
+            by <b>유저네임</b> <span class="my_text_body_sm">날짜</span>
 
-            <i class="far fa-heart my_fake_un_like my_mr_sm_1"></i>
-            by <b></b> <span class="my_text_body_sm"></span>
+            <i class="far fa-heart my_fake_un_like my_mr_sm_1" id="my-heart"></i>
+            by <b>유저네임</b> <span class="my_text_body_sm">날짜</span>
 
         </div>
     </div>
@@ -36,5 +36,6 @@
 
 </div>
 
+<!--<script src="/js/post/detail.js"></script>-->
 
 {{>/layout/footer}}
