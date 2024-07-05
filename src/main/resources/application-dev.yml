@@ -28,7 +28,7 @@ spring:
   #        - classpath:db/data.sql
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
     properties:
       #      쿼리 이쁘게

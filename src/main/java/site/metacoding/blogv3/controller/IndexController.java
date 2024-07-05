@@ -14,18 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class IndexController {
 
-    @GetMapping("/login-form")
-    public String loginForm() {
-
-        return "/user/loginForm";
-    }
-
-    @GetMapping("/join-form")
-    public String joinForm() {
-
-        return "/user/joinForm";
-    }
-
     @GetMapping("/s/user")
     public String updateForm() {
 
@@ -62,9 +50,4 @@ public class IndexController {
         return "/post/list";
     }
 
-    @GetMapping({ "/" })
-    public String main() {
-
-        return "main";
-    }
 }
