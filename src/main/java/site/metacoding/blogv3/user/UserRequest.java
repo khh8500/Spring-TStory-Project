@@ -26,4 +26,11 @@ public class UserRequest {
         private String username;
         private String password;
     }
+
+    // 비밀번호 변경
+    @Data
+    public static class ChangePasswordDTO {
+        private String password;
+        private String newPassword;
+    }
 }

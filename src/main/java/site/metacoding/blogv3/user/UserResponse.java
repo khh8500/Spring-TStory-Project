@@ -1,5 +1,6 @@
 package site.metacoding.blogv3.user;
 
+import lombok.Builder;
 import lombok.Data;
 
 public class UserResponse {
@@ -25,5 +26,18 @@ public class UserResponse {
     public static class LoginDTO {
         private String username;
         private String password;
+
+        public LoginDTO(User user) {
+            this.username = user.getUsername();
+            this.password = user.getPassword();
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public String getPassword() {
+            return password;
+        }
     }
 }
