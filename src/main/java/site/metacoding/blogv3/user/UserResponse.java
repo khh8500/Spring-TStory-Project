@@ -26,10 +26,12 @@ public class UserResponse {
     public static class LoginDTO {
         private String username;
         private String password;
+        private String email;
 
         public LoginDTO(User user) {
             this.username = user.getUsername();
             this.password = user.getPassword();
+            this.email = user.getEmail();
         }
     }
 }
