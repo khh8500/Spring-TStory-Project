@@ -14,12 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class IndexController {
 
-    @GetMapping("/s/user")
-    public String updateForm() {
-
-        return "/user/updateForm";
-    }
-
     @GetMapping("/user/password-reset-form")
     public String passwordResetForm() {
 

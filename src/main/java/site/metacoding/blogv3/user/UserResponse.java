@@ -31,13 +31,5 @@ public class UserResponse {
             this.username = user.getUsername();
             this.password = user.getPassword();
         }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public String getPassword() {
-            return password;
-        }
     }
 }

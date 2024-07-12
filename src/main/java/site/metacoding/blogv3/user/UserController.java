@@ -1,9 +1,12 @@
 package site.metacoding.blogv3.user;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import site.metacoding.blogv3._core.utils.ApiUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -54,46 +57,43 @@ public class UserController {
     }
 
     // 메인
-    @GetMapping({ "/" })
+    @GetMapping({"/"})
     public String main() {
 
         return "main";
     }
 
-    // 기존 비밀번호 확인
-    @PostMapping("/check-password")
-    @ResponseBody
-    public Map<String, Object> checkPassword(@RequestBody Map<String, String> request) {
-        Map<String, Object> response = new HashMap<>();
-        UserResponse.LoginDTO sessionUser = (UserResponse.LoginDTO) session.getAttribute("sessionUser");
+    // 유저정보 업데이트 폼
+    @GetMapping("/s/user")
+    public String updateForm() {
 
+        return "/user/updateForm";
+    }
+
+    // 기존 비밀번호 확인
+    @PostMapping(value = "/check-password", produces = "application/json")
+    @ResponseBody
+    public ResponseEntity<?> checkPassword(@RequestBody Map<String, String> request) {
         try {
+            UserResponse.LoginDTO sessionUser = (UserResponse.LoginDTO) session.getAttribute("sessionUser");
             String password = request.get("password");
             userService.checkPassword(sessionUser, password);
-            response.put("success", true);
+            return ResponseEntity.ok(new ApiUtil<>("비밀번호 확인되었습니다"));
         } catch (RuntimeException e) {
-            response.put("success", false);
-            response.put("message", e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiUtil<>(400, e.getMessage()));
         }
-        System.out.println("Response: " + response); // 서버 로그에 응답 출력
-        return response;
     }
 
     // 비밀번호 변경
-    @PostMapping("/change-password")
+    @PostMapping(value = "/change-password", produces = "application/json")
     @ResponseBody
-    public Map<String, Object> changePassword(@RequestBody UserRequest.ChangePasswordDTO reqDTO) {
-        Map<String, Object> response = new HashMap<>();
-        UserResponse.LoginDTO sessionUser = (UserResponse.LoginDTO) session.getAttribute("sessionUser");
-
+    public ResponseEntity<ApiUtil<String>> changePassword(@RequestBody UserRequest.ChangePasswordDTO reqDTO) {
         try {
+            UserResponse.LoginDTO sessionUser = (UserResponse.LoginDTO) session.getAttribute("sessionUser");
             userService.changePassword(sessionUser, reqDTO.getPassword(), reqDTO.getNewPassword());
-            System.out.println("reqDTO = " + reqDTO);
-            response.put("success", true);
+            return ResponseEntity.ok(new ApiUtil<>("비밀번호 변경되었습니다"));
         } catch (RuntimeException e) {
-            response.put("success", false);
-            response.put("message", e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiUtil<>(400, e.getMessage()));
         }
-        return response;
     }
 }

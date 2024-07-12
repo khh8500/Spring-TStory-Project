@@ -35,7 +35,7 @@ public class UserService {
     public void checkPassword(UserResponse.LoginDTO sessionUser, String password) {
 
         if (sessionUser == null) {
-            throw new RuntimeException("세션에 사용자 정보가 없습니다");
+            throw new RuntimeException("사용자 정보가 없습니다");
         }
 
         // 비밀번호 확인
@@ -49,11 +49,11 @@ public class UserService {
     public UserResponse.LoginDTO changePassword(UserResponse.LoginDTO sessionUser, String password, String newPassword) {
 
         if (sessionUser == null) {
-            throw new RuntimeException("세션에 사용자 정보가 없습니다");
+            throw new RuntimeException("사용자 정보가 없습니다");
         }
 
         User user = userRepository.findByUsernameAndPassword(sessionUser.getUsername(), password)
-                .orElseThrow();
+                .orElseThrow(() -> new RuntimeException("터뜨리기"));
 
         // 비밀번호 변경
         user.changePassword(newPassword);

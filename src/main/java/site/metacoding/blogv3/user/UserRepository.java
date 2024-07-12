@@ -9,4 +9,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     // 로그인
     Optional<User> findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
+
+    // 유저네임 중복체크
+    boolean existsByUsername(@Param("username") String username);
+
 }

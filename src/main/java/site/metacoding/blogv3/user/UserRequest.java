@@ -33,4 +33,10 @@ public class UserRequest {
         private String password;
         private String newPassword;
     }
+
+    // 유저네임 중복체크
+    @Data
+    public static class UsernameCheckDTO {
+        private String username;
+    }
 }
