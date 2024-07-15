@@ -1,16 +1,16 @@
 package site.metacoding.blogv3.user;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import site.metacoding.blogv3._core.utils.ApiUtil;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -35,7 +35,7 @@ public class UserController {
         UserResponse.JoinDTO sessionUser = userService.join(reqDTO);
         session.setAttribute("sessionUser", sessionUser);
 
-        return "redirect:/login-form";
+        return "redirect:/";
     }
 
     // 로그인 폼
@@ -53,6 +53,13 @@ public class UserController {
         System.out.println("reqDTO = " + reqDTO);
         session.setAttribute("sessionUser", sessionUser);
 
+        return "redirect:/";
+    }
+
+    // 로그아웃
+    @GetMapping("/logout")
+    public String logout() {
+        session.invalidate();
         return "redirect:/";
     }
 

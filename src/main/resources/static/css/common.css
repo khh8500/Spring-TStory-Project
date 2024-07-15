@@ -49,8 +49,16 @@
 }
 
 .my_navbar_title {
-    color: rgb(25, 25, 25);
     font-size: 30px;
+}
+
+.my_navbar_title a {
+    color: rgb(25, 25, 25);
+    text-decoration: none;
+}
+
+.my_navbar_title a:hover {
+    color: rgb(255, 85, 68);
 }
 
 .my_icon_btn {
