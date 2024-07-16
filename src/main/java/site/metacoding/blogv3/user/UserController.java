@@ -5,12 +5,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import site.metacoding.blogv3._core.utils.ApiUtil;
 
+import java.util.Collections;
 import java.util.Map;
 
 
@@ -102,5 +100,12 @@ public class UserController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiUtil<>(400, e.getMessage()));
         }
+    }
+
+    // 유저네임 중복체크
+    @GetMapping("/check-username")
+    public ResponseEntity<?> checkUsername(@RequestParam String username) {
+        boolean exists = userService.checkUsername(username);
+        return ResponseEntity.ok(Collections.singletonMap("exists", exists));
     }
 }

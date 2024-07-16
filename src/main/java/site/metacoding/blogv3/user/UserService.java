@@ -60,4 +60,11 @@ public class UserService {
 
         return new UserResponse.LoginDTO(user);
     }
+
+    // 유저네임 중복체크
+    @Transactional
+    public boolean checkUsername(String username) {
+
+        return userRepository.existsByUsername(username);
+    }
 }
