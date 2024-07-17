@@ -26,7 +26,7 @@ $("#username").on('input', function () {
 });
 
 function checkUsername() {
-    let username = $("#username").val();
+    let username = $("#username").val().trim();
 
     if (username === "") {
         $("#existsByUsername").text("").removeClass("text-success text-danger");
@@ -34,14 +34,12 @@ function checkUsername() {
     }
 
     $.ajax({
-        url: '/check-username',
+        url: '/check-username?username=' + username,
         method: 'GET',
-        data: {
-            username: username
-        }
     })
         .done(function (response) {
-            if (response.exists) {
+            console.log(response);
+            if (response.body.exists) {
                 $("#existsByUsername").text("유저네임이 이미 사용 중입니다").removeClass("text-success").addClass("text-danger");
                 isPass = false;
             } else {

@@ -1,10 +1,8 @@
 package site.metacoding.blogv3._core.utils;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 public class ApiUtil<T> {
 
     private Integer status;

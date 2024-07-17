@@ -1,6 +1,5 @@
 package site.metacoding.blogv3.user;
 
-import lombok.Builder;
 import lombok.Data;
 
 public class UserResponse {
@@ -32,6 +31,16 @@ public class UserResponse {
             this.username = user.getUsername();
             this.password = user.getPassword();
             this.email = user.getEmail();
+        }
+    }
+
+    // 유저네임 중복체크
+    @Data
+    public static class CheckUsernameDTO {
+        private Boolean exists;
+
+        public CheckUsernameDTO(Boolean exists) {
+            this.exists = exists;
         }
     }
 }

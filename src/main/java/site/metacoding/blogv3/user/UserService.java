@@ -62,9 +62,12 @@ public class UserService {
     }
 
     // 유저네임 중복체크
+    // 서비스에서 DTO를 만들어온다.
     @Transactional
-    public boolean checkUsername(String username) {
+    public UserResponse.CheckUsernameDTO checkUsername(String username) {
 
-        return userRepository.existsByUsername(username);
+        boolean exists = userRepository.existsByUsername(username);
+
+        return new UserResponse.CheckUsernameDTO(exists);
     }
 }

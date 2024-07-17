@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import site.metacoding.blogv3._core.utils.ApiUtil;
 
-import java.util.Collections;
 import java.util.Map;
 
 
@@ -105,7 +104,7 @@ public class UserController {
     // 유저네임 중복체크
     @GetMapping("/check-username")
     public ResponseEntity<?> checkUsername(@RequestParam String username) {
-        boolean exists = userService.checkUsername(username);
-        return ResponseEntity.ok(Collections.singletonMap("exists", exists));
+        UserResponse.CheckUsernameDTO respDTO = userService.checkUsername(username);
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 }
