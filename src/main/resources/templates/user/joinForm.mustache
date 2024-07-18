@@ -10,9 +10,7 @@
     <div class="my_auth_box">
         <div class="my_auth_form_box">
             <div class="my_auth_form_box_title">JStory</div>
-            <div class="my_error_box my_hidden">
-
-            </div>
+            <div class="my_error_box my_hidden"></div>
 
             <form action="/join" method="post" onsubmit="return joinSubmit()">
                 <div class="username_box">
@@ -28,10 +26,15 @@
                        maxlength="20" value="1234" required/>
                 <div class="message" id="passCheck"></div>
                 <div class="email_box">
-                    <input class="my_auth_form_box_input" type="email" name="email" placeholder="이메일" maxlength="60"
-                           value="ssar@nate.com" required/>
+                    <input id="email" class="my_auth_form_box_input" type="email" name="email" placeholder="이메일" maxlength="60"
+                           value="khh8500@naver.com" required/>
                     <button type="button" class="button-common email_btn" onclick="checkEmail()">메일인증</button>
                 </div>
+                <div class="email_verification_box" id="emailVerification" style="display: none">
+                    <input class="my_auth_form_box_input" type="text" name="emailVerificationCode" id="emailVerificationCode" placeholder="인증번호 6자리" maxlength="6" required/>
+                    <button type="button" class="button-common verification_btn" onclick="checkNumber()">인증확인</button>
+                </div>
+                <div class="message" id="auth-email"></div>
                 <button type="submit" class="my_secondary_btn">회원가입</button>
             </form>
 

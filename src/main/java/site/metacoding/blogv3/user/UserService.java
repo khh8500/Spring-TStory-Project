@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Random;
+
 
 @RequiredArgsConstructor
 @Service
@@ -69,5 +71,13 @@ public class UserService {
         boolean exists = userRepository.existsByUsername(username);
 
         return new UserResponse.CheckUsernameDTO(exists);
+    }
+
+    // 인증번호
+    private final Random random = new Random();
+
+    public String VerificationCode() {
+        int verificationCode = random.nextInt(1000000); // 0부터 999999까지
+        return String.format("%06d", verificationCode); // 6자리 숫자 문자열로 포맷팅
     }
 }

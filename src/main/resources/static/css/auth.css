@@ -76,3 +76,21 @@
     background-color: white; /* 배경색 하얀색 */
     color: rgb(255, 85, 68); /* 글자색 주황색 */
 }
+
+/* 인증번호 입력칸 스타일 */
+.email_verification_box {
+    margin-bottom: 10px;
+}
+
+#emailVerificationCode {
+    border: none;
+    border-bottom: 1px solid rgb(185, 185, 185);
+    height: 50px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#emailVerificationCode:focus {
+    outline: none;
+    border-bottom: 2px solid black;
+}

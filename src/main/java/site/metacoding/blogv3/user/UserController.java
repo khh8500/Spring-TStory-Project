@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import site.metacoding.blogv3._core.utils.ApiUtil;
+import site.metacoding.blogv3._core.utils.EmailUtil;
 
 import java.util.Map;
 
@@ -17,6 +18,7 @@ public class UserController {
 
     private final UserService userService;
     private final HttpSession session;
+    private final EmailUtil emailUtil;
 
     // 회원가입 폼
     @GetMapping("/join-form")
@@ -107,4 +109,14 @@ public class UserController {
         UserResponse.CheckUsernameDTO respDTO = userService.checkUsername(username);
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
+
+    // 인증번호
+    @GetMapping("/send-mail")
+    public ResponseEntity<?> sendMail(@RequestParam String email) {
+        String verificationCode = userService.VerificationCode();
+        String emailBody = emailUtil.getCertificationMessage(verificationCode);
+        emailUtil.sendEmail(email, "[Jstory 인증메일]", emailBody);
+        return ResponseEntity.ok(new ApiUtil<>(email + "메일 잘 보내졌어"));
+    }
+
 }
