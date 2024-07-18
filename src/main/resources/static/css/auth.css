@@ -39,9 +39,20 @@
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    position: relative;
 }
 
-.username_btn {
+.username_box input {
+    flex: 1; /* 입력 필드가 가능한 모든 공간을 차지하도록 설정 */
+    border: none;
+    border-bottom: 1px solid rgb(185, 185, 185);
+    height: 50px;
+    padding-right: 60px; /* 버튼 공간을 확보하기 위해 입력 필드의 오른쪽 여백 추가 */
+}
+
+.username_box .username_btn {
+    position: absolute;
+    right: 0;
     border: none;
     background-color: rgb(255, 85, 68);
     color: white;
@@ -49,5 +60,9 @@
     cursor: pointer;
     font-size: 14px;
     border-radius: 4px;
-    white-space: nowrap; /* 텍스트가 한 줄로 유지되도록 함 */
+    white-space: nowrap;
+    height: 30px;
+    display: flex;
+    align-items: center; /* 버튼 텍스트를 수직 가운데 정렬 */
+    justify-content: center; /* 버튼 텍스트를 수평 가운데 정렬 */
 }
