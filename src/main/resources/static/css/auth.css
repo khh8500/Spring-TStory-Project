@@ -35,14 +35,14 @@
     border-bottom: 2px solid black;
 }
 
-.username_box {
+.username_box, .email_box {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-    position: relative;
+    position: relative; /* 버튼과 입력 필드의 위치를 조정하기 위해 추가 */
 }
 
-.username_box input {
+.username_box input, .email_box input {
     flex: 1; /* 입력 필드가 가능한 모든 공간을 차지하도록 설정 */
     border: none;
     border-bottom: 1px solid rgb(185, 185, 185);
@@ -50,19 +50,29 @@
     padding-right: 60px; /* 버튼 공간을 확보하기 위해 입력 필드의 오른쪽 여백 추가 */
 }
 
-.username_box .username_btn {
+.button-common {
     position: absolute;
     right: 0;
     border: none;
-    background-color: rgb(255, 85, 68);
-    color: white;
     padding: 3px 3px;
     cursor: pointer;
     font-size: 14px;
     border-radius: 4px;
     white-space: nowrap;
-    height: 30px;
+    height: 30px; /* 버튼의 높이를 입력 필드와 맞추기 위해 설정 */
     display: flex;
     align-items: center; /* 버튼 텍스트를 수직 가운데 정렬 */
     justify-content: center; /* 버튼 텍스트를 수평 가운데 정렬 */
+}
+
+/* 개별 버튼 스타일 */
+.username_btn {
+    background-color: rgb(255, 85, 68);
+    color: white;
+}
+
+.email_btn {
+    border: 2px solid rgb(255, 85, 68); /* 아웃라인 주황색 */
+    background-color: white; /* 배경색 하얀색 */
+    color: rgb(255, 85, 68); /* 글자색 주황색 */
 }
