@@ -2,11 +2,11 @@ package site.metacoding.blogv3._core.utils;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-
-import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component
@@ -14,6 +14,7 @@ public class EmailUtil {
 
     private final JavaMailSender sender;
 
+    @Async
     // 메일 전송하는 메소드
     public void sendEmail(String toAddress, String subject, String body) {
 

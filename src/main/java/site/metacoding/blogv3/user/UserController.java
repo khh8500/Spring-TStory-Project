@@ -110,13 +110,26 @@ public class UserController {
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
+
     // 인증번호
     @GetMapping("/send-mail")
     public ResponseEntity<?> sendMail(@RequestParam String email) {
         String verificationCode = userService.VerificationCode();
         String emailBody = emailUtil.getCertificationMessage(verificationCode);
         emailUtil.sendEmail(email, "[Jstory 인증메일]", emailBody);
+
+        // 세션에 인증번호 저장
+        session.setAttribute("verificationCode", verificationCode);
+        System.out.println("verificationCode = " + verificationCode);
+
         return ResponseEntity.ok(new ApiUtil<>(email + "메일 잘 보내졌어"));
+    }
+
+    // 인증번호 확인
+    @GetMapping("/check-code")
+    public ResponseEntity<?> checkCode(@RequestParam String inputCode) {
+        boolean isValid = userService.checkCode(inputCode, session);
+        return ResponseEntity.ok(new ApiUtil<>(isValid));
     }
 
 }

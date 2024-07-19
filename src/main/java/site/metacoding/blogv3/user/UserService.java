@@ -1,5 +1,6 @@
 package site.metacoding.blogv3.user;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -79,5 +80,11 @@ public class UserService {
     public String VerificationCode() {
         int verificationCode = random.nextInt(1000000); // 0부터 999999까지
         return String.format("%06d", verificationCode); // 6자리 숫자 문자열로 포맷팅
+    }
+
+    // 인증번호 일치 확인
+    public boolean checkCode(String inputCode, HttpSession session) {
+        String sessionCode = (String) session.getAttribute("verificationCode");
+        return sessionCode != null && sessionCode.equals(inputCode);
     }
 }
