@@ -3,27 +3,24 @@ let isSamePassword = false; // password 일치 여부
 let isEmailVerified = false; // email 인증 체크 여부
 let isEmailNumberValid = false; // email 인증 번호가 일치 여부
 
-// 비밀번호 일치 확인
-$("#passwordCheck").keyup(function () {
-    let password = $("#password").val();
-    let passwordCheck = $(this).val();
+// 이벤트 바인딩
+    $("#passwordCheck").on("keyup", checkPassword);
+    $("#username").on("input", checkDuplicationUsername);
+    $("#checkUsername").on("click", checkUsername);
+    $("#email").on("input", email);
+    $("#checkEmail").on("click", sendEmail);
+    $("#emailVerificationCode").on("input", checkEmail);
+    $("#checkCode").on("click", checkCode);
+    $("#joinSubmit").on("submit", joinSubmit);
 
-    if (password !== passwordCheck) {
-        $("#passCheck").text("비밀번호가 일치하지 않습니다.").removeClass("text-success").addClass("text-danger");
-        isSamePassword = false;
-    } else {
-        $("#passCheck").text("비밀번호가 일치합니다.").removeClass("text-danger").addClass("text-success");
-        isSamePassword = true;
-    }
-});
 
 // 유저네임 중복체크
-$("#username").on('input', function () {
+function checkDuplicationUsername() {
     isSameUsername = false; // 유저네임이 변경될 때마다 중복 체크를 다시 하도록 설정
     $("#existsByUsername").text("").removeClass("text-success text-danger");
-});
+}
 
-$("#checkUsername").on("click", function(){
+function checkUsername() {
     let username = $("#username").val().trim();
 
     if (username === "") {
@@ -50,17 +47,30 @@ $("#checkUsername").on("click", function(){
             $("#existsByUsername").text("중복체크 중 오류가 발생했습니다").removeClass("text-success").addClass("text-danger");
             isSameUsername = false;
         });
-})
+}
 
+// 비밀번호 일치 확인
+function checkPassword() {
+    let password = $("#password").val();
+    let passwordCheck = $("#passwordCheck").val();
+
+    if (password !== passwordCheck) {
+        $("#passCheck").text("비밀번호가 일치하지 않습니다.").removeClass("text-success").addClass("text-danger");
+        isSamePassword = false;
+    } else {
+        $("#passCheck").text("비밀번호가 일치합니다.").removeClass("text-danger").addClass("text-success");
+        isSamePassword = true;
+    }
+}
 
 // 인증번호 메일 발송
-$("#email").on('input', function () {
+function email() {
     isEmailVerified = false; // 이메일이 변경될 때마다 중복 체크를 다시 하도록 설정
     $("#auth-email").text("").removeClass("text-success text-danger");
     $("#emailVerification").hide();
-});
+}
 
-function checkEmail() {
+function sendEmail() {
     let email = $("#email").val().trim();
 
     $.ajax({
@@ -81,9 +91,9 @@ function checkEmail() {
 }
 
 // 인증번호 일치 확인
-$("#emailVerification").on('input', function () {
+function checkEmail() {
     isEmailNumberValid = false; // 인증번호가 변경될 때마다 중복 체크를 다시 하도록 설정
-});
+}
 
 function checkCode() {
     let inputCode = $("#emailVerificationCode").val().trim();
@@ -120,13 +130,13 @@ function joinSubmit(){
 
 function validateForm() {
 
-    if (!isSamePassword) {
-        alert("비밀번호를 해주세요");
+    if (!isSameUsername) {
+        alert("유저네임 중복체크를 해주세요");
         return false;
     }
 
-    if (!isSameUsername) {
-        alert("유저네임 중복체크를 해주세요");
+    if (!isSamePassword) {
+        alert("비밀번호를 확인해주세요");
         return false;
     }
 
