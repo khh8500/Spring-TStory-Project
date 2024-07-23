@@ -66,20 +66,22 @@
 }
 
 /* 개별 버튼 스타일 */
+
 .username_btn {
     background-color: rgb(255, 85, 68);
     color: white;
 }
 
-.email_btn {
-    border: 2px solid rgb(255, 85, 68); /* 아웃라인 주황색 */
-    background-color: white; /* 배경색 하얀색 */
-    color: rgb(255, 85, 68); /* 글자색 주황색 */
+.email_btn, .verification_btn {
+    border: 2px solid rgb(255, 85, 68);
+    background-color: white;
+    color: rgb(255, 85, 68);
 }
 
 /* 인증번호 입력칸 스타일 */
 .email_verification_box {
     margin-bottom: 10px;
+    position: relative; /* 인증 버튼 위치 조정을 위해 추가 */
 }
 
 #emailVerificationCode {
@@ -88,9 +90,16 @@
     height: 50px;
     width: 100%;
     margin-top: 10px;
+    padding-right: 60px; /* 인증 확인 버튼을 위한 공간 확보 */
 }
 
 #emailVerificationCode:focus {
     outline: none;
     border-bottom: 2px solid black;
+}
+
+/* 인증확인 버튼 위치 조정 */
+.verification_btn {
+    top: 10px; /* 인증 번호 입력 칸과의 간격 조정 */
+    right: 0;
 }
