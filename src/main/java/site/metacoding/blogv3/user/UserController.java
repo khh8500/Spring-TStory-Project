@@ -32,7 +32,7 @@ public class UserController {
     public String join(UserRequest.JoinDTO reqDTO) {
 
         UserResponse.JoinDTO sessionUser = userService.join(reqDTO);
-        session.setAttribute("sessionUser", sessionUser);
+        session.setAttribute("sessionUserId", sessionUser.getId());
 
         return "redirect:/";
     }
@@ -49,8 +49,8 @@ public class UserController {
     public String login(UserRequest.LoginDTO reqDTO) {
 
         UserResponse.LoginDTO sessionUser = userService.login(reqDTO);
-        System.out.println("reqDTO = " + reqDTO);
-        session.setAttribute("sessionUser", sessionUser);
+        System.out.println("Logged in user ID: " + sessionUser.getId()); // 디버깅 로그
+        session.setAttribute("sessionUserId", sessionUser.getId());
 
         return "redirect:/";
     }
@@ -81,7 +81,11 @@ public class UserController {
     @ResponseBody
     public ResponseEntity<?> checkPassword(@RequestBody Map<String, String> request) {
         try {
-            UserResponse.LoginDTO sessionUser = (UserResponse.LoginDTO) session.getAttribute("sessionUser");
+            Integer sessionUserId = (Integer) session.getAttribute("sessionUserId");
+            if (sessionUserId == null) {
+                throw new RuntimeException("로그인이 필요합니다");
+            }
+            UserResponse.LoginDTO sessionUser = userService.findUserById(sessionUserId);
             String password = request.get("password");
             userService.checkPassword(sessionUser, password);
             return ResponseEntity.ok(new ApiUtil<>("비밀번호 확인되었습니다"));

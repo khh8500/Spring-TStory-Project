@@ -54,7 +54,7 @@
 
     <!-- Navbar text-->
     <ul class="navbar-nav">
-        {{#sessionUser}}
+        {{#sessionUserId}}
             <div class="dropdown dropleft">
                 <div data-toggle="dropdown" class="d-flex justify-content-end">
                     <img id="profile-img-btn" src="https://i1.sndcdn.com/avatars-000373392764-zp0p80-t500x500.jpg"
@@ -67,12 +67,12 @@
                     <a class="dropdown-item" href="/logout">로그아웃</a>
                 </div>
             </div>
-        {{/sessionUser}}
-        {{^sessionUser}}
+        {{/sessionUserId}}
+        {{^sessionUserId}}
             <div>
                 <a class="my_main_start_btn" href="/login-form">시작하기</a>
             </div>
-        {{/sessionUser}}
+        {{/sessionUserId}}
 
     </ul>
 

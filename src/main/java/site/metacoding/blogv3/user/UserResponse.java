@@ -23,11 +23,13 @@ public class UserResponse {
     // 로그인
     @Data
     public static class LoginDTO {
+        private Integer id;
         private String username;
         private String password;
         private String email;
 
         public LoginDTO(User user) {
+            this.id = user.getId();
             this.username = user.getUsername();
             this.password = user.getPassword();
             this.email = user.getEmail();

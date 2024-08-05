@@ -32,6 +32,13 @@ public class UserService {
         return new UserResponse.LoginDTO(user);
     }
 
+    // 사용자 조회
+    public UserResponse.LoginDTO findUserById(Integer id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return new UserResponse.LoginDTO(user);
+    }
+
     // 기존 비밀번호 확인
     @Transactional
     public void checkPassword(UserResponse.LoginDTO sessionUser, String password) {
@@ -57,7 +64,6 @@ public class UserService {
         User user = userRepository.findByUsernameAndPassword(sessionUser.getUsername(), password)
                 .orElseThrow(() -> new RuntimeException("터뜨리기"));
 
-        // 비밀번호 변경
         user.changePassword(newPassword);
         userRepository.save(user);
 

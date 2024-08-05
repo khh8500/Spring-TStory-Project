@@ -17,22 +17,6 @@ public class IndexController {
         return "/user/passwordResetForm";
     }
 
-    @GetMapping("/post")
-    public String detail() {
 
-        return "/post/detail";
-    }
-
-    @GetMapping("/s/post/write-form")
-    public String writeForm() {
-
-        return "/post/writeForm";
-    }
-
-    @GetMapping("/user/post")
-    public String postList() {
-
-        return "/post/list";
-    }
 
 }

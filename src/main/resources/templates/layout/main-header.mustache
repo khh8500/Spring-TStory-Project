@@ -41,7 +41,7 @@
         </svg>
     </a>
 
-    {{#sessionUser}}
+    {{#sessionUserId}}
         <div class="dropdown dropleft">
 
             <div data-toggle="dropdown">
@@ -57,12 +57,12 @@
                 <a class="dropdown-item" href="/logout">로그아웃</a>
             </div>
         </div>
-    {{/sessionUser}}
-    {{^sessionUser}}
+    {{/sessionUserId}}
+    {{^sessionUserId}}
         <div>
             <a class="my_main_start_btn" href="/login-form">시작하기</a>
         </div>
-    {{/sessionUser}}
+    {{/sessionUserId}}
 
 </nav>
 <br>
